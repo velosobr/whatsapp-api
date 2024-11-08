@@ -1,1 +1,55 @@
 # API de Whatsapp
+
+## Descrição
+
+Esta API permite a integração com o Whatsapp para envio e recebimento de mensagens.
+
+## Instalação
+
+1. Clone o repositório:
+   ```sh
+   git clone https://github.com/seu-usuario/guaca-whatsapp-api.git
+   ```
+2. Navegue até o diretório do projeto:
+   ```sh
+   cd guaca-whatsapp-api
+   ```
+3. Instale as dependências:
+   ```sh
+   npm install
+   ```
+
+## Uso
+
+Para iniciar a API, execute:
+```sh
+npm start
+```
+
+A API estará disponível em `http://localhost:3000`.
+
+## Endpoints
+
+### Enviar mensagem
+
+`POST /send`
+
+**Parâmetros:**
+- `to` (string): Número de telefone do destinatário.
+- `message` (string): Texto da mensagem.
+
+**Exemplo de requisição:**
+```sh
+curl -X POST http://localhost:3000/send -d '{"to": "+5511999999999", "message": "Olá, mundo!"}' -H "Content-Type: application/json"
+```
+
+### Receber mensagens
+
+`GET /messages`
+
+**Descrição:** Retorna as mensagens recebidas.
+
+**Exemplo de requisição:**
+```sh
+curl http://localhost:3000/messages
+```
