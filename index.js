@@ -8,10 +8,14 @@ const port = 3000;
 // Configuração do cliente WhatsApp com persistência de sessão
 const client = new Client({
   authStrategy: new LocalAuth(), // salva sessão localmente
+  puppeteer: {
+   args: ['--no-sandbox', '--disable-setuid-sandbox'],
+ },
 });
 
 // Gera o QR Code no terminal para login
 client.on("qr", (qr) => {
+   console.log('QR RECEIVED', qr);
   qrcode.generate(qr, { small: true });
 });
 
