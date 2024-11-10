@@ -54,6 +54,27 @@ app.get("/qrcode", async (req, res) => {
   }
 });
 
+// Endpoint para enviar mensagens via WhatsApp
+app.get("/send", async (req, res) => {
+  const { numero, mensagem } = req.query;
+
+  // Verifica se os parâmetros foram fornecidos
+  if (!numero || !mensagem) {
+    return res.status(400).send("Número e mensagem são obrigatórios!");
+  }
+
+  const chatId = `${numero}@c.us`; // Formato necessário para o número no WhatsApp
+
+  try {
+    // Envia a mensagem usando o cliente do WhatsApp
+    await client.sendMessage(chatId, mensagem);
+    res.send("Mensagem enviada com sucesso!");
+  } catch (error) {
+    console.error("Erro ao enviar mensagem:", error);
+    res.status(500).send("Erro ao enviar mensagem.");
+  }
+});
+
 // Endpoint padrão
 app.get("/", (req, res) => {
   res.send("API de WhatsApp - Acesse /qrcode para obter o QR Code.");
